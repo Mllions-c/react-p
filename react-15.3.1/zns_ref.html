@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react2组件生命周期</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script  src="build/jquery-3.1.1.min.js"></script>
+    <script src="../bower_components/babel/browser.min.js"></script>
+    <style>
+      .box{ height:200px; width:300px; background:#ccc;}
+    </style>
+    <script type="text/babel">
+{/*IE9及以上*/}
+     
+     class Title extends React.Component{
+
+      constructor (...args){//初始化
+        super (...args);//超类，用constructor必须用super
+       this.state= {color:'black'}
+      }
+    
+      fn(){
+      $(this.refs['s1']).css('color','red')//refs是原生的对象
+      
+      }
+
+      
+      render() {
+       
+        
+        return <ul>
+        <input type = "button" value = "按钮" onClick = {this.fn.bind(this)}/>
+        <span ref="s1">aaaaa</span>  
+         </ul>;
+         }
+      }
+ 
+      $(function(){
+      
+
+         ReactDOM.render(
+        <Title/>,
+       $('#div1')[0]//加0转换为原生
+      
+      )
+     });
+    </script>
+  </head>
+  <body>
+    <div id="div1">
+    </div>
+
+    
+  </body>
+</html>

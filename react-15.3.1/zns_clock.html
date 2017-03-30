@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react2组件生命周期</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="../bower_components/babel/browser.min.js"></script>
+    <style>
+      .box{ height:200px; width:300px; background:#ccc;}
+    </style>
+    <script type="text/babel">
+{/*IE9及以上*/}
+
+     class Clock extends React.Component{
+
+      constructor (...args){//初始化
+        super (...args);//超类，用constructor必须用super
+        this.state = {h:0,m:0,s:0};//constructor可以不用setState
+        var _this = this;
+        setInterval(function(){
+          _this.tick();
+        },1000);
+      }
+      componentDidMount(){
+        this.tick();
+      }
+      tick(){
+        var oDate = new Date();
+        this.setState({
+          h:oDate.getHours(),
+          m:oDate.getMinutes(),
+          s:oDate.getSeconds()
+        });
+      }
+      
+      render() {
+
+        return <div>
+        <span>{this.state.h}</span>:
+        <span>{this.state.m}</span>:
+        <span>{this.state.s}</span>
+         </div>;
+      }
+    }
+      window.onload=function(){
+      var oDiv =  document.getElementById("div1");  
+
+         ReactDOM.render(
+        <Clock/>,
+       oDiv
+      
+      )
+     };
+    </script>
+  </head>
+  <body>
+    <div id="div1">
+    </div>
+
+    
+  </body>
+</html>

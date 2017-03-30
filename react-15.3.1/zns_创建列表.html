@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react2组件生命周期</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="../bower_components/babel/browser.min.js"></script>
+    <style>
+      .box{ height:200px; width:300px; background:#ccc;}
+    </style>
+    <script type="text/babel">
+{/*IE9及以上*/}
+      class Item extends React.Component{
+        constructor(...args){
+          super(...args)
+        }
+   
+      render(){
+        return <li>{this.props.value}</li>
+      }
+    }
+     class List extends React.Component{
+
+      constructor (...args){//初始化
+        super (...args);//超类，用constructor必须用super
+        
+        this.state = {arr:[12, 5, 8, 9]};
+      }
+    
+      fn(){
+        
+        this.setState({
+         arr:this.state.arr.concat([Math.random()])
+        });
+      }
+
+      
+      render() {
+        var result = [];
+        var arr = this.state.arr;
+
+        for (var i = 0; i < arr.length;i++){
+          result.push(<Item key = {i} value = {arr[i]}/>);
+        } 
+        return <ul>
+        <input type = "button" value = "按钮" onClick = {this.fn.bind(this)}/>
+         {result}
+         </ul>;
+         }
+      }
+ 
+      window.onload=function(){
+      var oDiv =  document.getElementById("div1");  
+
+         ReactDOM.render(
+        <List/>,
+       oDiv
+      
+      )
+     };
+    </script>
+  </head>
+  <body>
+    <div id="div1">
+    </div>
+
+    
+  </body>
+</html>

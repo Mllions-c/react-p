@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>东立3</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var Messages = React.createClass({
+        changeText:function(){
+         alert('我被子组件调用了');
+        },
+       
+     render:function(){
+        return (
+          <h1>父组件{this.props.name}<Child changeText = {this.changeText} name = "努力到感动自己"/></h1>
+        );
+      }
+    });
+      var Child = React.createClass({
+ 
+        render:function(){
+        return (<span onClick ={this.props.changeText}>子组件接收到了：{this.props.name}
+         </span>
+          );
+      }
+      });
+      
+       ReactDOM.render(
+        <Messages name = "Aries"/>,
+        document.getElementById('example'),
+        function(){
+        console.log("渲染完成")
+        }
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>东立3</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var Message = React.createClass({
+      getInitialState:function(){
+        return ({
+          name:'努力到无能为力'
+        });
+      },
+
+      changeState:function(){
+        this.setState({
+          name:'拼搏到感动自己'
+        });
+      },
+      render:function(){
+        return (
+          <h1 onClick={this.changeState}>我的格言：{this.state.name}</h1>
+        );
+      }
+    });
+      ReactDOM.render(
+        <Message/>,
+        document.getElementById('example'),
+        function(){
+        console.log("渲染完成")
+        }
+      );
+    </script>
+  </body>
+</html>

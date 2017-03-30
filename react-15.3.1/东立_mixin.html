@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>东立3</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+     var fn = {                    //共同的方法抽离
+      clickEvent:function(data){
+        console.log(data);
+      }
+        
+      
+      };
+     var Messages = React.createClass({
+      mixins:[fn],//调入共同的方法
+      render:function(){
+        return (<div>
+                  <button onClick = {()=>this.clickEvent("Message")}>Message的btn</button>
+                  <Child/>
+        </div>
+        )
+      }
+     });
+
+      var Child = React.createClass({
+        mixins:[fn],//调入共同的方法
+    
+      render:function(){
+        return (<div>
+                  <button onClick = {()=>this.clickEvent('Child')}>Child的btn</button>
+        </div>)
+      }
+     });
+      
+      ReactDOM.render(
+        <Messages name = "Aries"/>,
+        document.getElementById('example'),
+       
+      );
+    </script>
+  </body>
+</html>

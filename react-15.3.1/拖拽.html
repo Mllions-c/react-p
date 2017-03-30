@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react2组件生命周期</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script  src="build/jquery-3.1.1.min.js"></script>
+    <script src="../bower_components/babel/browser.min.js"></script>
+    <style>
+      .box{ height:200px; width:300px; background:#ccc;}
+    </style>
+    <script type="text/babel">
+{/*IE9及以上*/}
+     
+     class Drags extends React.Component{
+
+      constructor (...args){//初始化
+        super (...args);//超类，用constructor必须用super
+       this.state= {x:0,y:0}
+      }
+    
+      fn(ev){
+    
+
+        var disX = ev.pageX-this.state.x;
+        var disY = ev.pageY-this.state.y;
+      
+        var _this = this;
+        document.onmousemove = function(ev){
+            _this.setState({
+              x:ev.pageX-disX,
+              y:ev.pageY-disY
+             
+            })
+            
+        }
+         document.onmouseup = function(){
+            
+             document.onmousemove = null;
+             document.onmousemup = null;
+         
+        };
+
+      }
+
+      
+      render() {
+       
+        
+        return <div style = {{left:this.state.x+'px',top:this.state.y+'px'}}
+          className = 'box' onMouseDown = {this.fn.bind(this)}>
+         </div>;
+         }
+      }
+ 
+      $(function(){
+      
+
+         ReactDOM.render(
+        <Drags/>,
+       $('blue-view')[0]
+      
+      )
+     });
+    </script>
+  </head>
+  <body>
+    <blue-view>
+    </blue-view>
+
+    
+  </body>
+</html>
